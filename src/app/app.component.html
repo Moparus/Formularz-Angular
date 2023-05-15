@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-dark-5@1.1.3/dist/css/bootstrap-night.min.css" rel="stylesheet">
+  <meta name="color-scheme" content="dark">
+  <title>Formularz</title>
+</head>
+<body>
+  <div class="d-flex justify-content-center m-3">
+    <form (ngSubmit) = "kebab(); formularz.resetForm()" class="w-50" #formularz="ngForm" class="was-validated">
+      <fieldset>
+        <h1>FORMULARZ</h1>
+        <div class="email-group">
+          <label for="inputEmail" class="form-label mt-4">Email</label>
+          <input type="email" [(ngModel)]="email" class="form-control" id="inputEmail" placeholder="Enter email" name="email" required pattern="^[^\s@]+@([^\s@.,]+\.)+[^\s@.,]{2,}$" #emailForm="ngModel">
+          <div class="invalid-feedback" *ngIf="emailForm.invalid && emailForm.touched">Podaj Email.</div>
+          <div class="invalid-feedback" *ngIf="emailForm.invalid && emailForm.errors?.['pattern']">To nie email :)</div>
+        </div>
+        <div class="password-group">
+          <label for="inputPassword" class="form-label mt-4">Hasło</label>
+          <input type="password" [(ngModel)]="haslo" class="form-control" id="inputPassword" placeholder="Password" name="haslo" required #hasloForm="ngModel">
+          <div class="invalid-feedback" *ngIf="hasloForm.invalid && hasloForm.touched">Podaj Haslo.</div>
+        </div>
+        <div class="select-group">
+          <label for="inputSelect" class="form-label mt-4">Województwo</label>
+          <select class="form-select" [(ngModel)]="wojewodztwo" id="inputSelect" name="select1" required  required #wojewodztwoForm="ngModel">
+            <option value="malopolskie">Małopolskie</option>
+            <option value="wielkopolskie">Wielkopolskie</option>
+            <option value="podlaskie">Podlaskie</option>
+            <option value="mazowieckie">Mazowieckie</option>
+            <option value="pomorskie">Pomorskie</option>
+          </select>
+          <div class="invalid-feedback" *ngIf="wojewodztwoForm.invalid && wojewodztwoForm.touched">Wybierz Województwo.</div>
+        </div>
+        <div class="select-2-group">
+          <label for="inputSelect2" class="form-label mt-4">Jedzenie</label>
+          <select multiple="" [(ngModel)]="jedzenie" class="form-select" id="inputSelect2" name="select2" required #jedzenieForm="ngModel">
+            <option value="kebab">Kebab</option>
+            <option value="pizza">Pizza</option>
+            <option value="bekon">Bekon</option>
+            <option value="lody">Lody</option>
+            <option value="kukurydza">Kukurydza</option>
+          </select>
+          <div class="invalid-feedback" *ngIf="jedzenieForm.invalid && jedzenieForm.touched">Wybierz Jedzenie.</div>
+        </div>
+        <div class="textarea-group">
+          <label for="inputTextarea" class="form-label mt-4">Opis (Nie obowiązkowy)</label>
+          <textarea class="form-control" [(ngModel)]="opis" id="inputTextarea" rows="3" name="opis" ></textarea>
+        </div>
+        <div class="file-group">
+          <label for="inputFile" class="form-label mt-4">Plik</label>
+          <input class="form-control" [(ngModel)]="plik" type="file" id="formFile" name="plik" required>
+        </div>
+        <fieldset class="radio-group">
+          <legend class="mt-4">Płeć</legend>
+          <div class="form-check">
+            <input class="form-check-input" [(ngModel)]="plec" type="radio" name="plec" id="inputPlec1" value="Mężczyzna" checked required>
+            <label class="form-check-label" for="inputPlec1">
+              Mężczyzna
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" [(ngModel)]="plec" type="radio" name="plec" id="inputPlec2" value="Kobieta">
+            <label class="form-check-label" for="inputPlec2">
+              Kobieta
+            </label>
+          </div>
+        </fieldset>
+        <fieldset class="checkbox-group">
+          <legend class="mt-4">Zainteresowania</legend>
+          <div class="form-check">
+            <input class="form-check-input" [(ngModel)]="zainteresowania" type="checkbox" value="" id="inputCheck1" name="zainteresowania">
+            <label class="form-check-label" for="inputCheck1">
+              Sport
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" [(ngModel)]="zainteresowania1" type="checkbox" value="" id="inputCheck2" name="zainteresowania">
+            <label class="form-check-label" for="inputCheck2">
+              Spanko
+            </label>
+          </div>
+        </fieldset>
+        <fieldset class="switch-group">
+          <legend class="mt-4">Zgody</legend>
+          <div class="form-check form-switch">
+            <input class="form-check-input" [(ngModel)]="regulamin" type="checkbox" id="inputSwitch1" name="switch" required #requlaminForm="ngModel">
+            <label class="form-check-label" for="inputSwitch1">Akceptacja Regulamin 1</label>
+          </div>
+        </fieldset>
+        <fieldset class="range-group">
+          <legend class="mt-4">Zakres</legend>
+            <label for="inputRange" class="form-label">Wiek</label>
+            <input type="range" [(ngModel)]="wiek" class="form-range" id="inputRange" min="0" max="110" step="1" name="zakres">
+        </fieldset>
+      </fieldset>
+      <button type="submit" class="btn btn-primary" id="submit" value="Send" [disabled]="!formularz.form.valid">Wyślij</button>
+      <button type="reset" class="btn btn-danger m-3" id="submit">Reset</button>
+    </form>
+  </div>
+</body>
+</html>
